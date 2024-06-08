@@ -1,57 +1,59 @@
-public class Spiral {
-                public static void spiral(int [][]arr)
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) 
+    {
+        
+        List<Integer> res = new ArrayList<>();
+
+       
+      if (matrix.length == 0) {
+      return res;
+        }
+
+      int sR=0;
+      int sC=0;
+      int eR=matrix.length-1;
+     int eC = matrix[0].length - 1; 
+
+     while(sR<=eR && sC<=eC)
+     {
+
+     // top
+     for(int j=sC;j<=eC;j++)
+     {
+         res.add(matrix[sR][j]);
+     }
+    
+     //right
+      for(int i=sR+1;i<=eR;i++)
+      {
+       res.add(matrix[i][eC]);
+
+      }
+
+     //bottom
+      for(int j=eC-1;j>=sC;j--)
+     {
+        if(sR==eR)
         {
-            int startRow=0;
-            int startCol=0;
-            int endRow=arr.length-1;
-            int endCol=arr[0].length-1;
-            
-            while(startRow<=endRow && startCol <=endCol)
-            {
-                //top
-               for(int j=startCol ;j<=endCol;j++)
-               {
-                   System.out.print(arr[startRow][j]+" ");
-               }
-               
-               //Right
-               for(int i=startRow+1 ;i<=endRow;i++)
-               {
-                   System.out.print(arr[i][endCol]+" ");
-               }
-               
-            //   bottom
-               for(int j=endCol-1 ;j>=startCol;j--)
-               {
-                   if(startRow==endRow)
-                   {
-                       break;
-                   }
-                   System.out.print(arr[endRow][j]+" ");
-               }
-               
-               //left
-               for(int i=endRow-1 ;i>=startRow+1;i--)
-               {
-                   if(startCol==endCol)
-                   {
-                       break;
-                   }
-                   System.out.print(arr[i][startCol]+" ");
-               }
-               startRow++;
-               startCol++;
-               endRow--;
-               endCol--;  
-               
-            }
-            System.out.println(); 
+            break;
         }
-        public static void main (String[] args) {
-            int [][]arr={{1,2,3,4},
-                          {5,6,7,8},
-                          {9,10,11,12},
-                          {13,14,15,16}};
-                spiral(arr);
+       res.add(matrix[eR][j]);
+     }
+
+      //left
+      for(int i=eR-1;i>=sR+1;i--)
+      {
+        if(sC==eC)
+        {
+            break;
         }
+         res.add(matrix[i][sC]);
+      }
+      sR++;
+      sC++;
+      eR--;
+      eC--;
     }
+    return res;
+}
+  }
